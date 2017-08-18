@@ -4,8 +4,9 @@ Example how to train a deep learning keras model to segment a tumor on brain MR 
 
 ## Workflow
 
-[Step 1: Train a keras model]()
-[Step 2: Run inference in browser]()
+[Step 1: Train a keras model](step1_train_model)
+
+[Step 2: Run inference in browser](step2_run_inference_in_browser)
 
 
 ## Code Requirements
@@ -34,39 +35,34 @@ Step 2: Test images
 
 ## Usage
 
-Step 1: Train model
+Step 1: Train model by running the preprocessing and training scripts: [0_preprocess.py](step1_train_model/0_preprocess.py) and [1_train.py](step1_train_model/1_train.py)
+
 
 ```sh
 cd Step1_train_model
 
-python [0_preprocess.py](step1_train_model/0_preprocess.py)
+python 0_preprocess.py
 
-python [1_train.py](step1_train_model/1_train.py)
+python 1_train.py
 ```
 
-The output of this step is mymodel.
+The output of this step is a model (/path/to/model.hdf5) that needs to be encoded using [encoder.py](https://github.com/transcranial/keras-js/blob/master/encoder.py)
 
 ```sh
-python [encoder.py](https://github.com/transcranial/keras-js/blob/master/encoder.py) /path/to/model.hdf5
+python encoder.py /path/to/model.hdf5
 ```
 
-Step 2: Import in broswer
-
-[keras.js instructions](https://github.com/transcranial/keras-js#usage) steps 4-5
+Step 2: Import in browser following the instructions 4-5 from [here](https://github.com/transcranial/keras-js#usage) steps 4-5
 
 our code in [brain-lesion-segmentation.html](step2_run_inference_in_browser/src/brain-lesion-segmentation.html) starting line 14
 
 ```html
-<!-- Load dependences-->
-
 <script src="../ext/keras.js"></script>
 ```
 
-and the js from [here](step2_run_inference_in_browser/src/brain-lesion-segmentation.js)
+and import our js from [here](step2_run_inference_in_browser/src/brain-lesion-segmentation.js)
 
 ```html
-<!-- predict image-->  
-
 <script src="../dist/brain-habitat-segmentation-128.js"></script>
 ```
 
