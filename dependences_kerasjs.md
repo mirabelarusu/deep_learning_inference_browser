@@ -1,4 +1,6 @@
-# This document summaries dependences to be able to use keras.js and run inference in the browser. 
+# Dependences [Keras.js](https://github.com/transcranial/keras-js)
+
+This document summaries dependences to be able to use keras.js and run inference in the browser. 
 
 The current version of this instructions does not include instruction for vue, [node.js](http://blog.teamtreehouse.com/install-node-js-npm-windows)
 
@@ -6,8 +8,6 @@ Install webpack (Instructions from [here](http://webpack.github.io/docs/tutorial
 
 ```npm install webpack -g```
 
-
-Loaders
 
 First install
 

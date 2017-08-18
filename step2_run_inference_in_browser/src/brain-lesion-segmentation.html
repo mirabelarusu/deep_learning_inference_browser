@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Deep Learning for Brain Habitat Segmentation </title>
+    <link rel="stylesheet" href="../../../style.css" />
+</head>
+  
+<body>
+  <h1><div>Brain Habitat Segmentation using Deep Learning </div></h1>
+    
+  <div>The model was trained to segment brain habitats (necrotic core, enhancing tumor, edema) on multi parametric MR images (T1 post contrast, T2 and Flair) using public data made available for the <a href="http://braintumorsegmentation.org/">BRATS challenge</a>. The trained model was imported in java script using <a href = "https://github.com/transcranial/keras-js">keras.js</a> </div> <br>
+  
+    <!-- Load dependences-->
+    <script src="../ext/keras.js"></script>
+    
+    <!-- Display -->
+    <div>
+      <table style="width:100%">
+        <tr>
+          <th></th>
+          <th>Source Image </th> 
+          <th></th>
+        </tr>
+        <tr>
+          <th>T1 post contrast</th>
+          <th>T2</th> 
+          <th>FLAIR</th>
+        </tr>
+        <tr>
+          <td><canvas id="t1" width="128" height="128"></canvas></td>
+          <td><canvas id="t2" width="128" height="128"></canvas></td>
+          <td><canvas id="fl" width="128" height="128"></canvas><br/></td>          
+        </tr>
+        <tr>
+          <th></th>
+          <th>Ground truth</th> 
+          <th></th>
+        </tr>
+        <tr>
+          <th>Enhancing Core</th>
+          <th>Necrosis </th> 
+          <th>Edema</th>
+        </tr>       
+        <tr>
+          <td><canvas id="t1-withOverlay" width="128" height="128"></canvas></td> 
+          <td><canvas id="t2-withOverlay" width="128" height="128"></canvas></td> 
+          <td><canvas id="fl-withOverlay" width="128" height="128"></canvas></td> 
+        </tr>
+        <tr>
+          <th></th>
+          <th> Prediction</th> 
+          <th></th>
+        </tr>
+        <tr>
+          <th>Enhancing Core</th>
+          <th>Necrosis </th> 
+          <th>Edema</th>
+        </tr>
+        <tr>
+          <td><canvas id="EnhCore" width="128" height="128"></canvas></td>
+          <td><canvas id="Necrosis" width="128" height="128"></canvas></td>
+          <td><canvas id="Edema" width="128" height="128"></canvas></td>
+        </tr>
+        
+        <tr>
+          <th></th>
+          <th><label id="status">Processing ... </label> </th> 
+          <th></th>
+        </tr>
+      </table>
+    </div>
+      
+    <!-- Load image and ground truth-->
+    <script src="display-util.js"></script>
+    <script>showImgInCanvas("../imgs/brain128/227_img_t1c.png",'t1');</script>
+    <script>showImgInCanvas("../imgs/brain128/227_img_t2.png",'t2');</script>
+    <script>showImgInCanvas("../imgs/brain128/227_img_fl.png",'fl');</script>
+  
+    <script>showOverlayInCanvas("../imgs/brain128/227_img_t1c.png","../imgs/brain128/227_label_4Enc2.png", 't1-withOverlay');</script>
+    <script>showOverlayInCanvas("../imgs/brain128/227_img_t2.png","../imgs/brain128/227_label_1Nec2.png", 't2-withOverlay');</script>
+    <script>showOverlayInCanvas("../imgs/brain128/227_img_fl.png","../imgs/brain128/227_label_2Edema2.png", 'fl-withOverlay');</script>
+
+  
+    <!-- predict image-->  
+    <script src="../dist/brain-habitat-segmentation-128.js"></script>
+  
+
+</body>
+    
+</html>
