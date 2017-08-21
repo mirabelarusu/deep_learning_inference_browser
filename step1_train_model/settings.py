@@ -1,23 +1,22 @@
-BASE = "/cellimg/Projects/BrainSeg/"
-DATA_PATH = BASE+"Data/ALL/"
-#IMG_ROWS = 192 
-#IMG_COLS = 192  
-#IMG_ROWS = 128   
-#IMG_COLS = 128   
-#OUT_PATH  = BASE+"Results/GBM_LGG_wholeBrain/"
-#OUT_PATH  = BASE+"Results/GBM_LGG_wholeBrain_48_by15/"
-#OUT_PATH  = BASE+"Results/GBM_LGG_wholeBrain_48_by3/"
+BASE = "."
+DATA_PATH = BASE+"/Data/"
+OUT_PATH  = BASE+"/Results/"
+IMG_ROWS = 128
+IMG_COLS = 128  
+RESCALE_FACTOR = 1
+SLICE_BY = 5 
 
 
-OUT_PATH  = BASE+"Results/GBM_LGG_wholeBrain_112_by3/"
-IMG_ROWS = 224
-IMG_COLS = 224  
-RESCALE_FACTOR = 2
-SLICE_BY = 3
-
-MODEL_FN = "brainHabitats4Inputs5Outputs"
 IN_CHANNEL_NO = 1
 OUT_CHANNEL_NO = 1
 
-EPOCHS = 251
+EPOCHS = 20
 
+#MODEL_FN = "brainWholeTumor" #Name for Mode=1
+#MODEL_FN = "brainActiveTumor" #Name for Mode=2
+MODEL_FN = "brainCoreTumor" #Name for Mode=3
+
+#Use flair to identify the entire tumor: test reaches 0.78-0.80: MODE=1
+#Use T1 Post to identify the active tumor: test reaches 0.65-0.75: MODE=2
+#Use T2 to identify the active core (necrosis, enhancing, non-enh): test reaches 0.5-0.55: MODE=3
+MODE=3
