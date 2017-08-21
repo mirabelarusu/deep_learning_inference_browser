@@ -14,7 +14,7 @@ In order to run the code in this repository you will need:
 4. Use [package.json](package.json) to install dependences (keras.js and browserify)
 
 ```sh
-npm install package.json
+npm install
 ```
 
 ## Data 

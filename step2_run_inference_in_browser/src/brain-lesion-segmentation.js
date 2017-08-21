@@ -38,9 +38,9 @@ function addToCanvas(canvasID, buffer, width, height)
 
 const model = new KerasJS.Model({
   filepaths: {
-    model: '../demos/data/brain_habitat_seg_128/brainHabitats.json',
-    weights: '../demos/data/brain_habitat_seg_128/brainHabitats_weights.buf',
-    metadata: '../demos/data/brain_habitat_seg_128/brainHabitats_metadata.json'
+    model: '../../step1_train_model/Results/brainHabitats.json',
+    weights: '../../step1_train_model/Results/brainHabitats_weights.buf',
+    metadata: '../../step1_train_model/Results/brainHabitats_metadata.json'
   },
   gpu: true,
   dim_ordering: 'tf'
