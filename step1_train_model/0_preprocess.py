@@ -7,6 +7,8 @@ import SimpleITK as sitk
 import settings
 import cv2
 import random
+
+"""
 def harmonizeToNormal(sitkImgIn, sitkMask, normalLabel = 10):
 
 	imgArray = sitk.GetArrayFromImage(sitkImgIn)
@@ -22,12 +24,15 @@ def harmonizeToNormal(sitkImgIn, sitkMask, normalLabel = 10):
 	    sitkImgOut = sitkImgIn
 
 	return sitkImgOut
-
+"""
+"""
 def apply_bias_field_correction(img, msk, numControlPoints=8, shrinkFactor=4, numFittingLevels=3, numIterationAtEachLevel=5, FWHM=0.15):
+"""
 	"""Runs N4 bias-correction on img (nibabel image) with mask msk  (nibabel image).
      Returns bias-corrected image (nibabel image) and  bias-field (SimpleITK image)
 	"""
 
+"""
 	print("Doing Bias Field Correction")
 	fImg  = sitk.Cast(img,sitk.sitkFloat32)
 	iMsk = sitk.Cast(msk, sitk.sitkInt32 )
@@ -59,6 +64,8 @@ def apply_bias_field_correction(img, msk, numControlPoints=8, shrinkFactor=4, nu
 		sitk.Cast(bfieldS,sitk.sitkFloat32))
 
 	return BSImgCor
+"""
+
 
 def get_data_from_dir(data_dir):
 	"""
@@ -144,14 +151,17 @@ def get_data_from_dir(data_dir):
 
 	return (t1, t1c, fl, t2, msk, isComplete);
 
+"""
 def preprocessSITK(img, img_rows, img_cols, resize_factor=1, 
 	applyBiasFieldCorrection = 0):
+"""
 	"""
 		crops, rescales, does the bias field correction on an sitk image
 	----
 	Input: sitk image
 	Output: sitk image
 	"""
+"""
 	si_img = img.GetSize()
 	sp_img = img.GetSpacing()
 	
@@ -172,9 +182,11 @@ def preprocessSITK(img, img_rows, img_cols, resize_factor=1,
 	return pr_img
 
 def preprocessNP(img_arr, tumor_arr = None):
+"""
 	"""
 	intensity preprocessing: normaling to normal region, rescale to 0-255 range
 	"""
+"""
 	normal_arr = (img_arr>0).astype('uint8')
 
 	if tumor_arr is not None:
@@ -184,6 +196,7 @@ def preprocessNP(img_arr, tumor_arr = None):
 	new_img_arr = img_arr/float(np.max(img_arr))*255.
 
 	return new_img_arr, normal_arr
+"""
 
 def create_datasets_4(img_path, img_rows, img_cols, img_slices, slice_by=5, resize_factor = 1, out_path='.'):
 	"""
