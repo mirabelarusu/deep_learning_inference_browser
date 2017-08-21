@@ -33,10 +33,10 @@ There are two main steps, and their code is made available in
 
 ### Train the model
 
-1. The [settings.py](step1_train_model/settings.py) is used to store paths, filenames, input varibles. The Data folder is by default `step1_train_model/Data` and the Results folder is
+* The [settings.py](step1_train_model/settings.py) is used to store paths, filenames, input varibles. The Data folder is by default `step1_train_model/Data` and the Results folder is
 `step1_train_model/Results`. The code was tested with the 200 subjects in the HGG cohort provided by the BRATS challenge [Brats data](https://sites.google.com/site/braintumorsegmentation/home/brats_2016)
 
-2. Train model by running the preprocessing [preprocess.py](step1_train_model/preprocess.py) and training [train.py](step1_train_model/train.py). The local 
+* Train model by running the preprocessing [preprocess.py](step1_train_model/preprocess.py) and training [train.py](step1_train_model/train.py). The local 
 
 
 ```sh
@@ -45,7 +45,7 @@ python preprocess.py
 python train.py
 ```
 
-3. The output of this step is a model stored in `Results` among other as `brainWholeTumor_009.hdf5` that needs to be encoded using [encoder.py](https://github.com/transcranial/keras-js/blob/master/encoder.py)
+* The output of this step is a model stored in `Results` among other as `brainWholeTumor_009.hdf5` that needs to be encoded using [encoder.py](https://github.com/transcranial/keras-js/blob/master/encoder.py)
 
 ```sh
 python encoder.py Results/brainWholeTumor_009.hdf5
@@ -55,18 +55,18 @@ The script will create two files: `Results/brainActiveTumor_009_metadata.json` a
 
 ### Run inference in the browser
 
-4. Create js file that will load and run the model. Instructions 4-5 from [here](https://github.com/transcranial/keras-js#usage) provide a summary of content. Our example file is  
+* Create js file that will load and run the model. Instructions 4-5 from [here](https://github.com/transcranial/keras-js#usage) provide a summary of content. Our example file is  
 ```sh
 step2_run_inference_in_browser/src/brain-lesion-segmentation.js
 ```
 
-5. Use browserify to create bundle js: 
+* Use browserify to create bundle js: 
 ```sh
 cd step2_run_inference_in_browser/src/
 browserify brain-lesion-segmentation.js > ../dist/brain-lesion-segmentation.js
 ```
 
-6. Import js code in html: [brain-lesion-segmentation.html](step2_run_inference_in_browser/src/brain-lesion-segmentation.html) starting line 14
+* Import js code in html: [brain-lesion-segmentation.html](step2_run_inference_in_browser/src/brain-lesion-segmentation.html) starting line 14
 
 ```html
 <script src="../ext/keras.js"></script>
