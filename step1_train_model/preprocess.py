@@ -108,10 +108,6 @@ def preprocessSITK(img, img_rows, img_cols, resize_factor=1):
 	upper_boundary	= [int((si_img[0]-img_rows+1)/2),int((si_img[1]-img_cols+1)/2),0]
 	pr_img = sitk.Crop(img, low_boundary, upper_boundary)
 
-	### apply bias field correction
-	###if applyBiasFieldCorrection:
-	###	pr_img = apply_bias_field_correction(pr_img, sitk.Cast(pr_img>0, sitk.sitkInt8))
-
 	if not resize_factor==1:
 		pr_img = sitk.Shrink(pr_img,[resize_factor, resize_factor, 1])
 		print ("Resizing to", pr_img.GetSize())
@@ -122,6 +118,7 @@ def normalize(img_arr):
 	"""
 	intensity preprocessing
 	"""
+	#new_img_arr = (img_arr-np.min(img_arr))/(np.max(img_arr)-np.min(img_arr))*255
 	new_img_arr = (img_arr-np.mean(img_arr))/np.std(img_arr)
 
 	return new_img_arr
