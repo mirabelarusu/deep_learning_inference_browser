@@ -1,4 +1,6 @@
-This repository contains code that will allow to train a deep learning keras model for tumor segmention on brain MR, and shows how to use the model to run the deep learning inference in the browser
+This repository contains code that will allow to train a deep learning keras model for tumor segmention on brain MR, and shows how to use the model to run the deep learning inference in the browser.
+
+The examples can be run from [https://github.build.ge.com/pages/212459265/deep_learning_inference_browser/](https://github.build.ge.com/pages/212459265/deep_learning_inference_browser/)
 
 
 ## Code Requirements
