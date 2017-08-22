@@ -1463,7 +1463,6 @@ module.exports = unique
 // Start timing now
 console.time("all");
 
-
 var ndarray = require("ndarray")
 var ops = require("ndarray-ops")
 
@@ -1498,6 +1497,9 @@ function addToCanvas(canvasID, buffer, width, height)
   outCtx.putImageData(idata, 0, 0);
 }
 
+console.time("LoadModel");
+console.time("all");
+
 const model = new KerasJS.Model({
   filepaths: {
     model: '../../step1_train_model/Results/brainWholeTumor.json',
@@ -1513,18 +1515,31 @@ model.ready()
 
     width = 128;
     height = 128;
+    
+    //get the input from canvas
     let dataTensorFl = getTensor('fl');
- 
-    let dataProcessedTensor = ndarray(new Float32Array(width * height * 1), [
-      width,
-      height,
-      1
-    ]);
   
+    //compute mean
+    mean = ops.sum(dataTensorFl.pick(null, null, 0));
+    mean = mean/(width*height)
+    //compute std
+    let dataTensorSq = ndarray(new Float32Array(width * height * 4), [width, height, 4]);
+    ops.mul(dataTensorSq,dataTensorFl,dataTensorFl);
+    std = Math.sqrt(ops.sum(dataTensorSq.pick(null, null, 0))/(width*height)-mean*mean);
+    
+    //normalize: substract mean and divide by std
+    ops.subseq(dataTensorFl, mean)
+    ops.divseq(dataTensorFl, std)
+ 
+    //create deep learning input object
+    let dataProcessedTensor = ndarray(new Float32Array(width * height * 1), [width, height, 1]);
+  
+    //assing the 
     ops.assign(
       dataProcessedTensor.pick(null, null, 0),
       dataTensorFl.pick(null, null, 0)
     );
+    
    
     const inputData = { 'input_1': dataProcessedTensor.data }
 
@@ -1533,34 +1548,34 @@ model.ready()
       .then(outputData => {
         //name of the last layer
         this.output = outputData['convolution2d_19'];
-      
-        var width   = 128;
-        var height  = 128;
-        var bufferEdema    = new Uint8ClampedArray(width*height*4)
+        var buffer  = new Uint8ClampedArray(width*height*4)
         
         for(var y = 0; y < height; y++) {
           for(var x = 0; x < width; x++) {
             var pos = (y * width + x) * 4; // position in buffer based on x and y
-             if (this.output[x+y*width]>0.9)
-             {
-                bufferEdema[pos+0] = dataProcessedTensor.data[x+y*width];
-                bufferEdema[pos+1] = 0;
-                bufferEdema[pos+2] = 0;
+              //show prediction in red (when prediction value is larger than 0.5)
+              if (this.output[x+y*width]>0.5)
+              {
+                 buffer[pos+0] = dataProcessedTensor.data[x+y*width]*std+mean;
+                 buffer[pos+1] = 0;
+                 buffer[pos+2] = 0;
               }
               else
               {
-                bufferEdema[pos+0] = dataProcessedTensor.data[x+y*width];
-                bufferEdema[pos+1] = dataProcessedTensor.data[x+y*width];
-                bufferEdema[pos+2] = dataProcessedTensor.data[x+y*width];
+                buffer[pos+0] = dataProcessedTensor.data[x+y*width]*std+mean;
+                buffer[pos+1] = dataProcessedTensor.data[x+y*width]*std+mean;
+                buffer[pos+2] = dataProcessedTensor.data[x+y*width]*std+mean;
               }
             
-            bufferEdema[pos+3] = 255;           
+              //alpha channel
+              buffer[pos+3] = 255;           
             
           }
         }
-      
-        addToCanvas('Edema', bufferEdema, width, height);
+
+        addToCanvas('WholeTumorPred', buffer, width, height);
         document.getElementById('status').innerHTML = 'Done';
+      
         return null; 
       })
       .catch(err => {
@@ -1572,4 +1587,6 @@ model.ready()
   .catch(err => {
      console.log(err);
   });
+
+var c = console.timeEnd("all");
 },{"ndarray":7,"ndarray-ops":6}]},{},[9]);
