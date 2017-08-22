@@ -25,11 +25,7 @@ npm install
 
 ## Summary of steps 
 
-There are two main steps, and their code is made available in 
-
-* [Step 1: Train a keras model](step1_train_model)
-
-* [Step 2: Run inference in browser](step2_run_inference_in_browser)
+There are two main steps:
 
 ### Train the model
 
@@ -57,24 +53,23 @@ The script will create two files: `Results/brainActiveTumor_009_metadata.json` a
 
 * Create js file that will load and run the model. Instructions 4-5 from [here](https://github.com/transcranial/keras-js#usage) provide a summary of content. Our example file is  
 ```sh
-step2_run_inference_in_browser/src/brain-lesion-segmentation.js
+step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.js
 ```
 
-* Use browserify to create bundle js: 
+* Use browserify to create bundle js that will be imported in the browser: 
 ```sh
-cd step2_run_inference_in_browser/src/
-browserify brain-lesion-segmentation.js > ../dist/brain-lesion-segmentation.js
+browserify step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.js > step2_run_inference_in_browser/dist/brain-lesion-segmentation-simple.js
 ```
 
-* Import js code in html: [brain-lesion-segmentation.html](step2_run_inference_in_browser/src/brain-lesion-segmentation.html) starting line 14
+* Import js code in html: [brain-lesion-segmentation-simple.html](step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.html) starting line 40
 
 ```html
-<script src="../ext/keras.js"></script>
+    <!-- Load dependences -->
+    <script src="../ext/keras.js"></script>
+
+    <!-- Run inference -->  
+    <script src="../dist/brain-lesion-segmentation-simple.js"></script>
 ```
 
-and on line 85
 
-```html
-<script src="../dist/brain-habitat-segmentation-128.js"></script>
-```
 
