@@ -1,0 +1,30 @@
+body { 
+  font-family: Helvetica, san-serif;
+}
+H1 { color: black; }
+H2 { color: dodgerblue; }
+
+div {
+    width: 420px;
+    background-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+}
+
+div.bigger{
+    width: 700px;
+    background-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;  
+}
+
+.imageWrapper {
+  position: relative;
+}
+.overlayImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
