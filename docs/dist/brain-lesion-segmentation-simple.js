@@ -1502,9 +1502,9 @@ console.time("all");
 
 const model = new KerasJS.Model({
   filepaths: {
-    model: '../../step1_train_model/Results/brainWholeTumor.json',
-    weights: '../../step1_train_model/Results/brainWholeTumor_009_weights.buf',
-    metadata: '../../step1_train_model/Results/brainWholeTumor_009_metadata.json'
+    model: '../demos/brainWholeTumor.json',
+    weights: '../demos/brainWholeTumor_009_weights.buf',
+    metadata: '../demos/brainWholeTumor_009_metadata.json'
   },
   gpu: true,
   dim_ordering: 'tf'
