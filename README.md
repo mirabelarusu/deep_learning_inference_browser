@@ -30,7 +30,7 @@ npm install
 
 There are two main steps:
 
-### Train the model
+### Step1: Train the model
 
 * The [settings.py](step1_train_model/settings.py) is used to store paths, filenames, input varibles. The Data folder is by default `step1_train_model/Data` and the Results folder is
 `step1_train_model/Results`. The code was tested with the 200 subjects in the HGG cohort provided by the BRATS challenge [Brats data](https://sites.google.com/site/braintumorsegmentation/home/brats_2016)
@@ -52,19 +52,21 @@ python encoder.py Results/brainWholeTumor_009.hdf5
 
 The script will create two files: `Results/brainActiveTumor_009_metadata.json` and `Results/brainActiveTumor_009_weights.buf` needed by kera.js (see next step).
 
-### Run inference in the browser
+### Step2: Create Java script to load the model and run the inferences
 
 * Create js file that will load and run the model. Instructions 4-5 from [here](https://github.com/transcranial/keras-js#usage) provide a summary of content. Our example file is  
 ```sh
 step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.js
 ```
 
+### Step3: Run inference in the browser 
+
 * Use browserify to create bundle js that will be imported in the browser: 
 ```sh
-browserify step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.js > step2_run_inference_in_browser/dist/brain-lesion-segmentation-simple.js
+browserify step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.js > docs/dist/brain-lesion-segmentation-simple.js
 ```
 
-* Import js code in html: [brain-lesion-segmentation-simple.html](step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.html) starting line 40
+* Import js code in html: [brain-lesion-segmentation-simple.html](docs/src/brain-lesion-segmentation-simple.html) starting line 40
 
 ```html
     <!-- Load dependences -->
