@@ -2,8 +2,8 @@ This repository contains code that will allow to train a deep learning keras mod
 
 The examples can be run from [https://mirabelarusu.github.io/deep_learning_inference_browser/](https://mirabelarusu.github.io/deep_learning_inference_browser/)
 
-[![Lesion Segmentation](./step2_run_inference_in_browser/imgs/LesionSegmentation2.png)](https://mirabelarusu.github.io/deep_learning_inference_browser/src/brain-lesion-segmentation-simple.html)
-[![Lesion Segmentation](./step2_run_inference_in_browser/imgs/LesionSegmentation1.png)](https://mirabelarusu.github.io/deep_learning_inference_browser/src/brain-lesion-segmentation.html)
+[![Lesion Segmentation](./step2_run_inference_in_browser/imgs/LesionSegmentation2.png)](https://mirabelarusu.github.io/deep_learning_inference_browser/src/brain-lesion-segmentation.html)
+[![Lesion Segmentation](./step2_run_inference_in_browser/imgs/LesionSegmentation1.png)](https://mirabelarusu.github.io/deep_learning_inference_browser/src/brain-lesion-segmentation-simple.html)
 ## Code Requirements
 
 In order to run the code in this repository you will need: 
