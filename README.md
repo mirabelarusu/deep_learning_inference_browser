@@ -74,5 +74,23 @@ browserify step2_run_inference_in_browser/src/brain-lesion-segmentation-simple.j
 <script src="../dist/brain-lesion-segmentation-simple.js"></script>
 ```
 
+### Step3. Test your webpage
 
+The test html page is located in 
+ [docs/src/brain-lesion-segmentation-simple.html](docs/src/brain-lesion-segmentation-simple.html). All the dependences are available in the folder [docs](doc). 
+ 
+If you are testing locally, you will need to have an http server running when you are testing. Starting an http server is possible via
+
+```sh
+python -m SimpleHTTPServer
+
+```
+
+ Once your website is posted online, such as done here in [docs](docs), you can test your page without having and HTTPServer running as can be seen here  
+ [https://mirabelarusu.github.io/deep_learning_inference_browser/](https://mirabelarusu.github.io/deep_learning_inference_browser/)
+
+###Contact: 
+Mirabela Rusu
+mirabela.rusu@ge.com
+mirabela.rusu@gmail.com
 
