@@ -89,8 +89,11 @@ python -m SimpleHTTPServer
  Once your website is posted online, such as done here in [docs](docs), you can test your page without having and HTTPServer running as can be seen here  
  [https://mirabelarusu.github.io/deep_learning_inference_browser/](https://mirabelarusu.github.io/deep_learning_inference_browser/)
 
-###Contact: 
+### Contact
+
 Mirabela Rusu
+
 mirabela.rusu@ge.com
+
 mirabela.rusu@gmail.com
 
