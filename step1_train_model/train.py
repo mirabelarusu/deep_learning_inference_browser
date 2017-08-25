@@ -28,14 +28,12 @@ def train_and_predict(data_path, img_rows, img_cols, n_epoch, input_no  = 3, out
 	print('-'*30)
 	imgs_train, msks_train = load_data(data_path,"_train")
 	imgs_train, msks_train = update_channels(imgs_train, msks_train, input_no, output_no, mode)
-	imgs_train *= 255.0
 	
 	print('-'*30)
 	print('Loading and preprocessing test data...')
 	print('-'*30)
 	imgs_test, msks_test = load_data(data_path,"_test")
 	imgs_test, msks_test = update_channels(imgs_test, msks_test, input_no, output_no, mode)
-	imgs_test *= 255.0
 
 
 	print('-'*30)
