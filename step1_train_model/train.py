@@ -1,19 +1,11 @@
-""" Train keras model using unet architecture """
-
 from keras import backend as K
 K.set_image_dim_ordering('tf')	
-from keras.preprocessing.image import ImageDataGenerator
-from keras.callbacks import ModelCheckpoint, LearningRateScheduler, EarlyStopping, Callback
-from keras.metrics import binary_accuracy
+from keras.callbacks import ModelCheckpoint
 from keras.callbacks import History 
 from keras.models import Model
-K.set_image_dim_ordering('tf')	# Theano dimension ordering in this code
 
 import numpy as np
 import os
-import cv2
-from sklearn.metrics import accuracy_score
-import SimpleITK as sitk
 
 from preprocess import * 
 from helper import *
@@ -27,7 +19,8 @@ def train_and_predict(data_path, img_rows, img_cols, n_epoch, input_no  = 3, out
 	print('Loading and preprocessing train data...')
 	print('-'*30)
 	imgs_train, msks_train = load_data(data_path,"_train")
-	imgs_train, msks_train = update_channels(imgs_train, msks_train, input_no, output_no, mode)
+	imgs_train, msks_train = update_channels(imgs_train, msks_train, input_no, output_no, 
+		mode)
 	
 	print('-'*30)
 	print('Loading and preprocessing test data...')
@@ -39,14 +32,12 @@ def train_and_predict(data_path, img_rows, img_cols, n_epoch, input_no  = 3, out
 	print('-'*30)
 	print('Creating and compiling model...')
 	print('-'*30)
-	model		= model5_MultiLayer(False, False, img_rows, img_cols, input_no, 
-		output_no)
+	model		= model5_MultiLayer(False, False, img_rows, img_cols, input_no,	output_no)
 	model_fn	= os.path.join(data_path, fn+'_{epoch:03d}.hdf5')
 	print ("Writing model to ", model_fn)
 
-	model_checkpoint = ModelCheckpoint(model_fn,
-		monitor='loss',
-		save_best_only=False) # saves all models when set to False
+	model_checkpoint = ModelCheckpoint(model_fn, monitor='loss', save_best_only=False) 
+	# saves all models when set to False
 
 
 	print('-'*30)
@@ -79,10 +70,7 @@ def train_and_predict(data_path, img_rows, img_cols, n_epoch, input_no  = 3, out
 	print("Done ", epochNo, np.min(msks_pred), np.max(msks_pred))
 	np.save(os.path.join(data_path, 'msks_pred.npy'), msks_pred)
 
-	scores = model.evaluate(imgs_test,
-		msks_test,
-		batch_size=128, 
-		verbose = 2)
+	scores = model.evaluate(imgs_test, msks_test, batch_size=128,verbose = 2)
 	print ("Evaluation Scores", scores)
 
 if __name__ =="__main__":
